@@ -1,7 +1,1 @@
-[
-  "Kilian",
-  "Koen",
-  "Ashlee"
-]hirsa",
-  "Inessa"
-]
+["Alex","Ashlee","Inessa","Kilian","Koen","Loet","Sara","Thirsa"]

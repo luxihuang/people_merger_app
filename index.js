@@ -1,52 +1,35 @@
 const fs = require('fs');
-// const mainFile = './peopleComplete.json';
-var files = ['./people1.json', './people2.json',];
 
-function read(file){
-    fs.readFile(file, 'utf8', (err, data) => {
+fs.readFile('./people1.json', 'utf8', (err, data) => {
+    if(err) throw err;
+    const results1 = JSON.parse(data);
+    console.log('This is the first array: ' + results1);
+
+    fs.readFile('./people2.json', 'utf8', (err, data) => {
         if(err) throw err;
-        console.log(data);
+        const results2 = JSON.parse(data);
+        console.log('This is the second array: ' + results2);
 
-        fs.writeFile('./peopleComplete.txt', data, function(err){
+    let combinedResults = results1.concat(results2);
+    console.log('This is the combined array: ' + combinedResults);
+
+    let sortCombinedResults = combinedResults.sort();
+    console.log('This is the sorted combined array: ' + sortCombinedResults);
+    
+    let stringifysortCombinedResults = JSON.stringify(sortCombinedResults);
+    console.log('This is the stringify sorted combined array: ' + stringifysortCombinedResults);
+    
+        fs.writeFile('./peopleComplete.txt', stringifysortCombinedResults, function(err){
             if (err) throw err;
-                var results = console.log(data + 'written data');
-                results.sort();
-            })
-        })
-};
+                console.log('stringify sorted combined content has been written.');
 
-for(var i = 0; i <files.length; i++){
-    read(files[i]);
-    console.log(files[i]);   
-};
-     
-
-
-// function readAppend(mainFile, fileToBeAppended) {
-//     fs.readFile(fileToBeAppended, 'utf8', function (err, data) {
-//         if(err) throw err;
-//         var results1 = data;
-//         console.log(results);
-
-//     fs.appendFile(mainFile, data, (err) => {
-//       if (err) throw err;
-//       // console.log('The "data to append" was appended to file');
-//     });
-//     });
-// }
-
-// // for(var i = 0; i < fileToBeAppended.length; i++){
-// //     read(fileToBeAppended[i]);
-// //     console.log(fileToBeAppended[i]);   
-// // };
-
-
-// fileToBeAppended = './people1.json';
-// readAppend(mainFile, fileToBeAppended);
-
-// fileToBeAppended = './people2.json';
-// readAppend(mainFile, fileToBeAppended);
-
+        fs.writeFile('./peopleComplete.json', stringifysortCombinedResults, function(err){
+            if (err) throw err;
+                console.log('stringify sorted combined content has been written to JSON file.');
+        });
+        });
+    });
+});
 
 //source --> http://stevehanov.ca/blog/index.php?id=127
 //source --> https://stackoverflow.com/questions/34943132/node-js-read-two-files-compare-parts-of-files-and-output-a-sorted-file
